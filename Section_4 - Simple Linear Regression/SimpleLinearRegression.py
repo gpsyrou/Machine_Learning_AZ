@@ -29,4 +29,42 @@ from sklearn.linear_model import LinearRegression
 linear_regressor = LinearRegression()
 linear_regressor.fit(X_train, y_train)
 
+# Predicting values for the test set
+y_hat = linear_regressor.predict(X_test)
+
+# Visualising the results
+# Training Set
+plt.figure(figsize=(10,6))
+
+plt.scatter(X_train, y_train, color = 'red', label = 'Real values (yi)')
+plt.plot(X_train, linear_regressor.predict(X_train), color = 'blue', label = 'Estimated Regression Line, f(x) = b0 +b1*x') # estimated regression line
+plt.title("Salary($) vs Years of Experience (Training set)")
+plt.xlabel("Years of Experience")
+plt.ylabel("Salary")
+plt.grid(True)
+plt.legend(loc = 'best')
+plt.show()
+
+# Test Set
+plt.figure(figsize=(10,6))
+
+plt.scatter(X_test, y_test, color = 'red', label = 'Real values (yi)')
+plt.plot(X_train, linear_regressor.predict(X_train), color = 'blue', label = 'Estimated Regression Line, f(x) = b0 +b1*x') # estimated regression line
+plt.title("Salary($) vs Years of Experience (Test set)")
+plt.xlabel("Years of Experience")
+plt.ylabel("Salary")
+plt.grid(True)
+plt.legend(loc = 'best')
+plt.show()  
+
+# Evaluate performance
+# Methods: MAE, MSE, RMSE
+from sklearn.metrics import mean_absolute_error, mean_squared_error
+
+mae = mean_absolute_error(y_test, y_hat)
+mse = mean_squared_error(y_test, y_hat)
+
+print('Mean Absolute Error: {0}'.format(mae))  
+print('Mean Squared Error: {0}'.format(mse)) 
+print('Root Mean Squared Error: {0}'.format(np.sqrt(mse)))
 
