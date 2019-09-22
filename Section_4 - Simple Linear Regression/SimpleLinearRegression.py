@@ -68,3 +68,5 @@ print('Mean Absolute Error: {0}'.format(mae))
 print('Mean Squared Error: {0}'.format(mse)) 
 print('Root Mean Squared Error: {0}'.format(np.sqrt(mse)))
 
+from sklearn.metrics import r2_score
+print('R-squared: {0}'.format(r2_score(y_test, y_hat)))
