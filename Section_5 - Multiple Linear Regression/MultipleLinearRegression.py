@@ -12,6 +12,7 @@ os.chdir("C:\\Users\\george\\Desktop\\temp\\Multiple_Linear_Regression")
 
 # Import dataset
 import pandas as pd
+import numpy as np
 
 data = pd.read_csv("50_Startups.csv")
 data.columns
@@ -63,6 +64,42 @@ regressor.fit(X_train, y_train)
 
 # Make predictions
 y_hat = regressor.predict(X_test)
+
+# Building the optimal model by using model selection with Backward Elimination
+import statsmodels.formula.api as sm
+
+X = np.append(arr = np.ones((50,1)).astype(int), values = X, axis = 1)
+
+# Iteration 1
+X_opt = X[:, [0,1,2,3,4,5]]
+regressor_OLS = sm.OLS(endog = y, exog = X_opt).fit()
+regressor_OLS.summary()
+# index 2 had the highest P value so we remove it and re-do
+
+# Iteration 2
+X_opt = X[:, [0,1,3,4,5]]
+regressor_OLS = sm.OLS(endog = y, exog = X_opt).fit()
+regressor_OLS.summary()
+
+# Iteration 3
+X_opt = X[:, [0,3,4,5]]
+regressor_OLS = sm.OLS(endog = y, exog = X_opt).fit()
+regressor_OLS.summary()
+
+# Iteration 4
+X_opt = X[:, [0,3,5]]
+regressor_OLS = sm.OLS(endog = y, exog = X_opt).fit()
+regressor_OLS.summary()
+
+# Iteration 5
+X_opt = X[:, [0,3,5]]
+regressor_OLS = sm.OLS(endog = y, exog = X_opt).fit()
+regressor_OLS.summary()
+
+
+
+
+
 
 
 
