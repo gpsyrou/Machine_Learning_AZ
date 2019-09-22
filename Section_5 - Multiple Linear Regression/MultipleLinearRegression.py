@@ -92,15 +92,6 @@ regressor_OLS = sm.OLS(endog = y, exog = X_opt).fit()
 regressor_OLS.summary()
 
 # Iteration 5
-X_opt = X[:, [0,3,5]]
+X_opt = X[:, [0,3]]
 regressor_OLS = sm.OLS(endog = y, exog = X_opt).fit()
-regressor_OLS.summary()
-
-
-
-
-
-
-
-
-
+regressor_OLS.summary() # optimal model with only the intercept and 'R&D Spend'
