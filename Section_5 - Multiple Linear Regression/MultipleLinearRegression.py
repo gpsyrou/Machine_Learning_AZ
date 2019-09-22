@@ -22,7 +22,7 @@ data.dtypes
 
 '''
 
-y = b0 + b1*x1 + b2*x2 + ... + bn * xn
+y = b0 + b1*x1 + b2*x2 + ... + bn * xn + bN+1 * Dummy1
 
 Assumptions of Linear Regression:
     1) Linearity
@@ -33,10 +33,31 @@ Assumptions of Linear Regression:
 '''
 
 # Split dataset to dependent and independent variables
-X = data.iloc[:, 0:4]
-y = data.iloc[:, -1]
+X = data.iloc[:, 0:4].values
+y = data.iloc[:, -1].values
 
 
 # Creating dummy variables for State
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+
+label_encoder = LabelEncoder()
+X[:,3] = label_encoder.fit_transform(X[:,3])
+
+onehotencoder  = OneHotEncoder(categorical_features=[3])
+X = onehotencoder.fit_transform(X).toarray()
+
+
+# Split into train and test sets
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
+
+
+
+
+
+
+
+
+
+
 
