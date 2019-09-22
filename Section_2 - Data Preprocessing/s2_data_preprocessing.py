@@ -42,9 +42,17 @@ y = labelencoder_y.fit_transform(y)
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
 
-# Feauture Scalling
+# Feauture Scalling (2 main methods exist)
 # Standardisation: x_standard = x - mean(x) / std(x)
 # Normalization: x_normalized = x - min(x) / max(x) - min(x)
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+
+sc_x = StandardScaler()
+X_train = sc_x.fit_transform(X_train) # for train set we have to first fit and then transform
+X_test = sc_x.transform(X_test) # for test set we just need to apply the transformation
+
+
+
 
 
 
