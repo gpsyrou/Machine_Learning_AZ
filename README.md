@@ -9,3 +9,4 @@ Udemy course on Machine Learning
     2) Simple Linear Regression
     3) Multiple Linear Regression
     4) Polynomial Regression
+    5) Support Vector Regression
