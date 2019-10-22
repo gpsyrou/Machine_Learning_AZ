@@ -7,7 +7,9 @@ Udemy course on Machine Learning
 
 
 **Part 1 - Regression**
+
 Topics covered:
+
           1) Simple Linear Regression
           2) Multiple Linear Regression
           3) Polynomial Regression
