@@ -5,9 +5,14 @@ Udemy course on Machine Learning
 
 **Topics Covered:**
 
-    1) Data Preprocessing
-    2) Regression:
+
+**Part 1 - Regression**
+Topics covered:
           1) Simple Linear Regression
           2) Multiple Linear Regression
           3) Polynomial Regression
           4) Support Vector Regression
+
+
+
+**Part 2 - Classification**
