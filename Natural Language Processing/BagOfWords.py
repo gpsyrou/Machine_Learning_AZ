@@ -1,5 +1,6 @@
 """
 Natural Language Processing
+Bag of Words model
 """
 
 # Creating a Bag of Words model for Restaurant Reviews
@@ -31,3 +32,44 @@ data['Review'] = data['Review'].apply(lambda text:
 
 # Finally make the words to join back and form a 'string' per row
 data['Review'] = data['Review'].apply(lambda ls: ' '.join(ls))
+
+# Our final Corpus
+corpus = data['Review']
+
+# Creating the BagOfWords model
+
+# This model will create one column per word
+# Columns: Words
+# Rows: Reviews 
+
+from sklearn.feature_extraction.text import CountVectorizer
+cv = CountVectorizer(max_features = 1500) # Keep the 1500 most relevant words
+X = cv.fit_transform(corpus).toarray()
+
+X.shape # 1000 reviews (rows) and 1500 words (columns)
+
+y = data.iloc[:, 1].values
+
+
+# Training a Naive Bayes Classification model to our corpus
+
+# Splitting the dataset into the Training set and Test set
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.20, random_state = 0)
+
+# Fitting Naive Bayes 
+from sklearn.naive_bayes import GaussianNB
+naive_bayes = GaussianNB()
+naive_bayes.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = naive_bayes.predict(X_test)
+
+# Making the Confusion Matrix
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(y_test, y_pred)
+cm
+'''
+[56, 41],
+[13, 90]]
+'''
