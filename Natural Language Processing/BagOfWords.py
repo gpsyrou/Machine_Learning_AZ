@@ -69,7 +69,42 @@ y_pred = naive_bayes.predict(X_test)
 from sklearn.metrics import confusion_matrix
 cm = confusion_matrix(y_test, y_pred)
 cm
+
 '''
-[56, 41],
-[13, 90]]
+TP:56
+FP:41
+FN:13
+TN:90
 '''
+
+'''
+Accuracy = (TP + TN) / (TP + TN + FP + FN)
+
+Precision = TP / (TP + FP)
+
+Recall = TP / (TP + FN)
+
+F1 Score = 2 * Precision * Recall / (Precision + Recall)
+'''
+
+def GetEvaluationMetrics(confusion_matrix, metric = 'all'):
+    '''
+    Takes as input the results of a confusion matrix, and calculates
+    the Accuracy, Precision, Recall and F1 Score of a classification
+    algorithm
+    
+    Parameters: 
+        confusion_matrix: sklearn.metrics.classification.confusion_matrix object
+        metric: 'all','accuracy','precision','recall',f1_score'. Default is 'all'
+    '''
+    size = np.sum(confusion_matrix)
+    accuracy = confusion_matrix[0][0] + confusion_matrix[1][1] / size
+    precision = confusion_matrix[0][0] / (confusion_matrix[0][0] + confusion_matrix[0][1])
+    recall = confusion_matrix[0][0] / (confusion_matrix[0][0] + confusion_matrix[1][0])
+    f1_score = (2 * precision * recall) / (precision + recall)
+    
+    print(f'The accuracy is {accuracy}%\nThe precision is {precision}%\nThe recall is {recall}%\nThe F1-score is {f1_score}%')
+    
+    return None
+
+GetEvaluationMetrics(cm)
