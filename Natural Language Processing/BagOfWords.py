@@ -99,12 +99,13 @@ def GetEvaluationMetrics(confusion_matrix, metric = 'all'):
     '''
     size = np.sum(confusion_matrix)
     accuracy = confusion_matrix[0][0] + confusion_matrix[1][1] / size
-    precision = confusion_matrix[0][0] / (confusion_matrix[0][0] + confusion_matrix[0][1])
-    recall = confusion_matrix[0][0] / (confusion_matrix[0][0] + confusion_matrix[1][0])
-    f1_score = (2 * precision * recall) / (precision + recall)
+    precision = np.round(100 * (confusion_matrix[0][0] / (confusion_matrix[0][0] + confusion_matrix[0][1])), 2)
+    recall = np.round(100 * confusion_matrix[0][0] / (confusion_matrix[0][0] + confusion_matrix[1][0]), 2)
+    f1_score = np.round(((2 * precision * recall) / (precision + recall)) / 100 , 3)
     
-    print(f'The accuracy is {accuracy}%\nThe precision is {precision}%\nThe recall is {recall}%\nThe F1-score is {f1_score}%')
+    print(f'The accuracy is {accuracy}%\nThe precision is {precision}%\nThe recall is {recall}%\nThe F1-score is {f1_score}')
     
     return None
 
 GetEvaluationMetrics(cm)
+
